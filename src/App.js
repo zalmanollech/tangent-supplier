@@ -15,7 +15,10 @@ export default function App() {
   useEffect(() => {
     let mounted = true;
     (async () => {
-      if (!hasWallet()) { if (mounted) { setWalletOK(false); setNetOK(false); setChecking(false); } return; }
+      if (!hasWallet()) {
+        if (mounted) { setWalletOK(false); setNetOK(false); setChecking(false); }
+        return;
+      }
       try {
         if (mounted) setWalletOK(true);
         const ok = await ensureSepolia();
@@ -27,11 +30,11 @@ export default function App() {
     return () => { mounted = false; };
   }, []);
 
-  if (checking) return <div style={{ padding: "2rem", fontFamily: "Arial" }}><h2>Loading…</h2></div>;
+  if (checking) return <div style={{ padding: 16, fontFamily: "Arial" }}><h2>Loading…</h2></div>;
   if (!walletOK) return <NoWallet />;
   if (!netOK) {
     return (
-      <div style={{ padding: "2rem", fontFamily: "Arial" }}>
+      <div style={{ padding: 16, fontFamily: "Arial" }}>
         <h2>Switch to Sepolia</h2>
         <p>Open MetaMask and switch to the Sepolia test network, then reload.</p>
         <button onClick={() => window.location.reload()}>Reload</button>
@@ -44,16 +47,33 @@ export default function App() {
       <h1 style={{ marginBottom: 0 }}>✅ Tangent MVP</h1>
       <div style={{ color: "#555", marginBottom: 8 }}>Network: Sepolia (11155111)</div>
 
-      {/* Supplier (vault funding/withdraw test) */}
-      <SupplierTest />
+      {/* SUPPLIER */}
+      <div style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
+        <h2 style={{ marginTop: 0 }}>Supplier</h2>
+        <SupplierTest />
+      </div>
 
-      {/* Buyer creates orders (escrow), Documents gates trading, Trader fills when eBL accepted */}
-      <BuyerPanel />
-      <DocumentPanel />
-      <TraderPanel />
+      {/* BUYER */}
+      <div style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
+        <h2 style={{ marginTop: 0 }}>Buyer</h2>
+        <BuyerPanel />
+      </div>
+
+      {/* DEAL DOCUMENTS */}
+      <div style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
+        <h2 style={{ marginTop: 0 }}>Deal Documents</h2>
+        <DocumentPanel />
+      </div>
+
+      {/* TRADER */}
+      <div style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
+        <h2 style={{ marginTop: 0 }}>Trader</h2>
+        <TraderPanel />
+      </div>
     </div>
   );
 }
+
 
 
 
