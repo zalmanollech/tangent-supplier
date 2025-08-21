@@ -1,6 +1,5 @@
-# Replit runner for a Node 20 app on port 4000
 entrypoint = "server.js"
-run = "bash -lc 'npm install --no-audit --no-fund && node server.js'"
+run = "bash -lc 'npm start'"
 
 [env]
 PORT = "4000"
